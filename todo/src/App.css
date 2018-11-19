@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.todoList_wrap { width:350px; margin:0 auto; display:table;}
+.todo_item { width:300px; float:left; margin:10px auto; height:30px; cursor:pointer;}
+.trash { width:40px; height:40px; background:url('./images/garbage_close.png') center no-repeat; float:right; cursor:pointer;}
+.trash:hover { background:url('./images/garbage_open.png') center no-repeat;}
+.complete { text-decoration:line-through; background: #ededed;}
+.filterList {list-style:none;}
+.filterList li { display:inline-block; margin-right: 20px; border:1px solid #eee; padding:10px 30px; cursor:pointer;}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
