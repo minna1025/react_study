@@ -55,13 +55,22 @@ class App extends Component {
       )
     });
   }
+
+  handleEdit = (id,data) => {
+    const { whatUdo } = this.state;
+    this.setState({
+      whatUdo: whatUdo.map(
+        todo => todo.id === id
+          ? {...todo, ...data}
+          : todo
+      )
+    });
+  }
   
   filtering = (filter) => {
-    console.log(' filter : ', filter);
     this.setState({
       showWhat: filter
     });
-    console.log('app : ', this.state.showWhat);
   }
 
   render() {
@@ -74,6 +83,7 @@ class App extends Component {
           data={this.state.whatUdo}
           onRemove={this.handleRemove}
           onComplete={this.handleComplete}
+          onEdit={this.handleEdit}
           onFilter={this.filtering} />
       </div>
     );

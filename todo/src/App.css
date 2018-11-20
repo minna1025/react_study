@@ -22,9 +22,11 @@
   color: #61dafb;
 }
 
-.todoList_wrap { width:350px; margin:0 auto; display:table;}
+.todoList_wrap { width:400px; margin:0 auto; display:table;}
 .todo_item { width:300px; float:left; margin:10px auto; height:30px; cursor:pointer;}
-.trash { width:40px; height:40px; background:url('./images/garbage_close.png') center no-repeat; float:right; cursor:pointer;}
+.edit { width:50px; height:50px; background:url('./images/edit.png') center no-repeat; float:left; cursor:pointer;}
+.edit:hover { background:url('./images/edit_hover.png') center no-repeat;}
+.trash { width:50px; height:50px; background:url('./images/garbage_close.png') center no-repeat; float:right; cursor:pointer;}
 .trash:hover { background:url('./images/garbage_open.png') center no-repeat;}
 .complete { text-decoration:line-through; background: #ededed;}
 .filterList {list-style:none;}

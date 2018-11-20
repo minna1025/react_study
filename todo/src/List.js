@@ -16,26 +16,23 @@ class List extends Component {
     super(props);
     this.state = {
       showList: this.props.data,
-      showWhat: this.showWhat
+      showWhat: 'all'
     }
     
-    this.complete = this.props.data.filter( todo => todo.state === false );
-    this.doit = this.props.data.filter( todo => todo.state === true );
+    this.complete = this.props.data.filter( todo => todo.state === true );
+    this.doit = this.props.data.filter( todo => todo.state === false );
   }
 
   filterShow = (whatToShow) => {
     this.setState({
       showWhat: whatToShow
     });
-    console.log('this.state.showWhat : ', this.state.showWhat);
-    console.log('before: ', this.props.showWhat);
-    this.props.onFilter(this.state.showWhat);
-    console.log('after : ', this.state.showWhat);
+    this.props.onFilter(whatToShow);
   }
 
   render() {
-    const { data, onRemove, onComplete, onFilter, showWhat } = this.props;
-    this.showWhat = this.state.showWhat;
+    const { data, onRemove, onComplete, onFilter, showWhat, onEdit, onCreate } = this.props;
+    const { abotFilter } = this.state.showWhat;
     const list = data.map(
       todo => (
         <Todo 
@@ -43,23 +40,42 @@ class List extends Component {
           todo={todo} 
           onRemove={onRemove}
           onComplete={onComplete}
-          onFilter={onFilter} />
+          onEdit={onEdit} />
       )
     );
 
+    const filter = this.state.showWhat;
     const listAll = list;
-    const listComplete = this.complete;
-    const listdoit = this.doit;
-    console.log('showWhat : ', showWhat);
+    const listdoit = this.doit.map(
+      todo => (
+        <Todo
+          key={todo.id}
+          todo={todo} 
+          onRemove={onRemove}
+          onComplete={onComplete}
+          onEdit={onEdit} />
+      )
+    );
+    const listComplete = this.complete.map(
+      todo => (
+        <Todo
+          key={todo.id}
+          todo={todo} 
+          onRemove={onRemove}
+          onComplete={onComplete}
+          onEdit={onEdit} />
+      )
+    );
 
     return (
       <Fragment>
         <div className="todoList_wrap">
           {
+            // listAll
             (function() {
-              if(showWhat === 'all') return (<div>{listAll}</div>);
-              if(showWhat === 'complete') return (<div>{listComplete}</div>);
-              if(showWhat === 'doit') return (<div>{listdoit}</div>);
+              if(filter === 'all') return (<div>{listAll}</div>);
+              if(filter === 'complete') return (<div>{listComplete}</div>);
+              if(filter === 'doit') return (<div>{listdoit}</div>);
             })()
           }
         </div>

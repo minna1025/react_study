@@ -24,8 +24,6 @@ class Filter extends Component {
   }
 
   render() {
-    const { showList, showWhat } = this.props.filter;
-
     return(
       <ul className="filterList">
         <li onClick={this.showAll}>다보시오</li>
