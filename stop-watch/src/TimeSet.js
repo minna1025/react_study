@@ -32,7 +32,7 @@ class TimeSet extends Component {
   timerStart = (e) => {
     e.preventDefault();
 
-    if( !this.state.stating && this.state.inputTime != '' ) {
+    if( !this.state.stating && this.state.inputTime !== '' ) {
       let time = document.getElementById('time').value;
       let _milliSec = 99, _sec, _min, _hour;
 
