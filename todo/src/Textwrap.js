@@ -14,6 +14,12 @@ class Textwrap extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const textBox = document.getElementById('textBox');
+    if( textBox.value === '' || textBox.value === undefined ){
+      alert('뭐라도 좀 쓰시지?!');
+      return false;
+    }
+
     this.props.onCreate(this.state);
     this.setState({
       doSomething: ''
@@ -24,6 +30,7 @@ class Textwrap extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input 
+          id="textBox"
           type="text"
           placeholder="뭐할껀데?!?!?"
           onChange={this.handleChange}

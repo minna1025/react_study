@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Textwrap from './Textwrap';
 import List from './List';
+import Filter from './Filter';
 import './App.css';
 
 class App extends Component {
@@ -25,8 +26,7 @@ class App extends Component {
         doSomething: 'list test',
         state: false
       }
-    ],
-    showList: []
+    ]
   }
 
   handleCreate = (data) => {
@@ -65,15 +65,21 @@ class App extends Component {
           : todo
       )
     });
-  }
-  
-  filtering = (filter) => {
+  }  
+
+  filterShow = (whatToShow) => {
     this.setState({
-      showWhat: filter
+      showWhat: whatToShow
     });
   }
 
   render() {
+
+    const list = this.state.whatUdo;
+    const showWhat = this.state.showWhat;
+    const complete = this.state.whatUdo.filter( todo => todo.state === true );
+    const doit = this.state.whatUdo.filter( todo => todo.state === false );
+
     return (
       <div className="App">
         <Header name="TO DO" />
@@ -84,7 +90,16 @@ class App extends Component {
           onRemove={this.handleRemove}
           onComplete={this.handleComplete}
           onEdit={this.handleEdit}
-          onFilter={this.filtering} />
+          listItem={
+            (function() {
+              if( showWhat === 'all' ) return (list);
+              if( showWhat === 'doit' ) return (doit);
+              if( showWhat === 'complete' ) return (complete);
+            })()
+          } />
+        <Filter
+          onFilter={this.filterShow}
+          active={this.state.showWhat} />
       </div>
     );
   }

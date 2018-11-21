@@ -25,7 +25,7 @@ class Todo extends Component {
 
   handleComplete = () => {
     this.props.todo.state = !this.props.todo.state;
-    const { todo, onComplete } = this.props;
+    const { onComplete } = this.props;
     onComplete( this.props.todo.id, this.props.todo );
   }
 
@@ -43,7 +43,7 @@ class Todo extends Component {
 
   handleEdit = (e) => {
     e.preventDefault();
-    const { todo, onEdit } = this.props;
+    const { onEdit } = this.props;
     this.setState({
       doSomething: '',
       edit: !this.state.edit
@@ -52,9 +52,7 @@ class Todo extends Component {
   }
 
   render() {
-    const {
-      id, doSomething, state
-    } = this.props.todo;
+    const { doSomething } = this.props.todo;
 
     return (
       <Fragment>
