@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class Textwrap extends Component {
 
   state = {
-    doSomething: ''
+    doSomething: '',
+    state: false
   }
 
   handleChange = (e) => {
@@ -22,7 +23,8 @@ class Textwrap extends Component {
 
     this.props.onCreate(this.state);
     this.setState({
-      doSomething: ''
+      doSomething: '',
+      state: false
     });
   }
 

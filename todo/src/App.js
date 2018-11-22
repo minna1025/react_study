@@ -77,8 +77,8 @@ class App extends Component {
 
     const list = this.state.whatUdo;
     const showWhat = this.state.showWhat;
-    const complete = this.state.whatUdo.filter( todo => todo.state === true );
-    const doit = this.state.whatUdo.filter( todo => todo.state === false );
+    const complete = list.filter( todo => todo.state === true );
+    const doit = list.filter( todo => todo.state === false );
 
     return (
       <div className="App">
