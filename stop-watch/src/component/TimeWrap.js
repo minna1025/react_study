@@ -15,7 +15,6 @@ class TimeWrap extends Component {
 
   render() {
     const { hour, min, sec, milliSec } = this.props;
-    console.log('this.peops : ', this.props)
     return (
       <div className="time-wrap" id='time_wrap'>
         <span id="hour">
