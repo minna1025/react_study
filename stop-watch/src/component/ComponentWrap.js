@@ -7,50 +7,69 @@ import Buttons from './Buttons';
 class ComponentWrap extends Component {
 
   state = {
-    hour: 0,
-    min: 0,
-    sec: 0,
     milliSec: 0,
-    inputTime: '',
+    inputTime: 0,
     stating: false
   }
 
   handleInput = (num) => {
-    let time = Math.floor(num);
-    let _sec = time % 60;
-    let _min = time / 60;
+    num = parseInt(num);
 
-    this.setState({
-      inputTime: time,
-      sec: Math.floor(_sec),
-      min: Math.floor(_min % 60),
-      hour: Math.floor(_min / 60),
-    });
+    if(num && typeof num === 'number') {
+      if(num <= 359999) {
+        this.setState({
+          milliSec: num * 1000,
+          inputTime: num,
+        })
+      }else {
+        this.setState({
+          milliSec: 0,
+          inputTime: ''
+        })
+      }
+    }
   }
 
   handleStart = (state) => {
-    if( state ) {
-
+    console.log(state);
+    console.log(this.state.stating);
+    if( !state ){
+      this.countDown = setInterval( () => {
+        if( this.state.inputTime !== 0 ) {
+          this.setState( prevState => ({
+            inputTime: prevState.inputTime - 10
+          }))
+        }else {
+          this.setState({
+            milliSec: 0,
+            inputTime: 0,
+            stating: false
+          })
+          clearInterval(this.countDown);
+        }
+      }, 10);
+      this.setState( prevState => ({
+        stating: !prevState.stating
+      }))
     }
   }
 
   handleStop = (state) => {
     this.setState({
       stating: !state
-    })
+    });
+    clearInterval(this.countDown);
   }
 
   render() {
-    const { hour, min, sec, milliSec, inputTime, stating } = this.state;
+    const { milliSec, inputTime, stating } = this.state;
     return (
       <article>
         <TimeSet />
         <TimeWrap
-          hour={hour}
-          min={min}
-          sec={sec}
           milliSec={milliSec}
           inputTime={inputTime}
+          getTime={this.handleInput}
          />
         <InputBox
           onInput={this.handleInput}
@@ -59,6 +78,7 @@ class ComponentWrap extends Component {
           onStart={this.handleStart}
           onStop={this.handleStop}
           state={stating}
+          inputTime={inputTime}
         />
       </article>
     );

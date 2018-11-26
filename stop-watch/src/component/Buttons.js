@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 
 class Buttons extends Component {
   state = {
-    stating: false
+    state: false
   }
   
   timerStart = () => {
-    const { stating } = this.state;
-    const { onStart, state } = this.props;
+    const { state } = this.state;
+    const { onStart, stating, inputTime } = this.props;
 
-    if( !state ) {
+    if(inputTime === undefined) {
+      alert('Did U RIGTH write down the time?!');
+      return false;
+    }
+
+    if( !stating ) {
       this.setState({
-        stating: !stating
+        state: !state
       });
-      onStart(stating);
+      onStart(state);
     }
   }
 
@@ -32,7 +37,7 @@ class Buttons extends Component {
     return (
       <div className="btn-row">
         {
-          this.state.stating === false
+          this.state.state === false
             ? (<button className="start" onClick={this.timerStart}>start</button>)
             : (<button className="stop" onClick={this.timerStop}>stop</button>)
         }
