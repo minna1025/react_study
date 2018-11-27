@@ -9,7 +9,7 @@ class Buttons extends Component {
     const { state } = this.state;
     const { onStart, stating, inputTime } = this.props;
 
-    if(inputTime === undefined) {
+    if(inputTime === 0) {
       alert('Did U RIGTH write down the time?!');
       return false;
     }
@@ -23,15 +23,23 @@ class Buttons extends Component {
   }
 
   timerStop = () => {
-    const { stating } = this.state;
-    const { onStop } = this.props;
-    this.setState({
-      stating: !stating
-    });
-    onStop(stating);
+    const { state } = this.state;
+    const { onStop, stating } = this.props;
+    if( stating ) {
+      this.setState({
+        state: !state
+      });
+      onStop(state);
+    }
   }
 
-  timerReset = () => {}
+  timerReset = () => {
+    const { onReset } = this.props;
+    this.setState({
+      state: false
+    });
+    onReset();
+  }
 
   render() {
     return (

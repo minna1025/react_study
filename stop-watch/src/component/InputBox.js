@@ -12,13 +12,15 @@ class InputBox extends Component {
   }
 
   render() {
-    const { inputTime } = this.props;
+    const { sec } = this.props;
     return (
       <div>
         <input 
+          id="inputTime"
           type="text"
-          value={inputTime}
+          value={sec}
           onChange={this.handleInput}
+          placeholder='0'
         />
       </div>
     )

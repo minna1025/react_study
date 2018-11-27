@@ -1,7 +1,8 @@
 export default class Time {
 
   getTime = (millisec) => {
-    let time = millisec * 1000;
+    // let time = millisec * 1000;
+    let time = millisec;
 
     const hour = this.formatUnitOfTime(Math.floor( time / ( 60 * 60 * 1000 ) ));
 

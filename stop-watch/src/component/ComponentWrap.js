@@ -7,7 +7,7 @@ import Buttons from './Buttons';
 class ComponentWrap extends Component {
 
   state = {
-    milliSec: 0,
+    sec: 0,
     inputTime: 0,
     stating: false
   }
@@ -18,22 +18,27 @@ class ComponentWrap extends Component {
     if(num && typeof num === 'number') {
       if(num <= 359999) {
         this.setState({
-          milliSec: num * 1000,
-          inputTime: num,
+          sec: num,
+          inputTime: num * 1000,
         })
       }else {
+        alert('plz input time under 100H');
         this.setState({
-          milliSec: 0,
+          sec: 0,
           inputTime: ''
         })
+        document.getElementById('inputTime').value="";
+        return false;
       }
     }
   }
 
   handleStart = (state) => {
-    console.log(state);
-    console.log(this.state.stating);
-    if( !state ){
+    this.setState( prevState => ({
+      stating: !this.state.stating
+    }));
+
+    if( !this.state.stating ){
       this.countDown = setInterval( () => {
         if( this.state.inputTime !== 0 ) {
           this.setState( prevState => ({
@@ -41,43 +46,57 @@ class ComponentWrap extends Component {
           }))
         }else {
           this.setState({
-            milliSec: 0,
+            sec: 0,
             inputTime: 0,
             stating: false
           })
           clearInterval(this.countDown);
         }
       }, 10);
-      this.setState( prevState => ({
-        stating: !prevState.stating
-      }))
     }
   }
 
   handleStop = (state) => {
-    this.setState({
-      stating: !state
-    });
+    if( this.state.stating ) {
+      clearInterval(this.countDown);
+      this.setState( prevState => ({
+        stating: !state,
+        sec: Math.floor(prevState.inputTime/1000)
+      }));
+    }
+  }
+
+  handleReset = () => {
     clearInterval(this.countDown);
+    this.setState({
+      sec: 0,
+      inputTime: 0,
+      stating: false
+    });
+    document.getElementById('inputTime').value="";
   }
 
   render() {
-    const { milliSec, inputTime, stating } = this.state;
+    const { sec, inputTime, stating } = this.state;
     return (
       <article>
         <TimeSet />
+        <h2>----------------- <br/>아래부턴 컴포넌트가<br/> 분리되어있넹 <br/>-----------------</h2>
         <TimeWrap
-          milliSec={milliSec}
+          sec={sec}
           inputTime={inputTime}
           getTime={this.handleInput}
          />
         <InputBox
           onInput={this.handleInput}
+          sec={sec}
+          inputTime={inputTime}
         />
         <Buttons
           onStart={this.handleStart}
           onStop={this.handleStop}
-          state={stating}
+          onReset={this.handleReset}
+          stating={stating}
           inputTime={inputTime}
         />
       </article>
