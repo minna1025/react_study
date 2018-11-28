@@ -29,20 +29,20 @@ class Filter extends Component {
       <ul className="filterList" id='filterList'>
         {
           active === 'all'
-            ? (<li onClick={this.showAll} className="active">다보시오</li>)
-            : (<li onClick={this.showAll}>다보시오</li>)
+            ? (<li onClick={this.showAll} className="active">ALL</li>)
+            : (<li onClick={this.showAll}>ALL</li>)
         }
         
         {
           active === 'doit'
-            ? (<li onClick={this.filterdoit} className="active">해라!!!!!</li>)
-            : (<li onClick={this.filterdoit}>해라!!!!!</li>)
+            ? (<li onClick={this.filterdoit} className="active">Do it!</li>)
+            : (<li onClick={this.filterdoit}>Do it!</li>)
         }
         
         {
           active === 'complete'
-            ? (<li onClick={this.filterComplete} className="active">다함?!?!!</li>)
-            : (<li onClick={this.filterComplete}>다함?!?!!</li>)
+            ? (<li onClick={this.filterComplete} className="active">DONE!</li>)
+            : (<li onClick={this.filterComplete}>DONE!</li>)
         }
       </ul>
     );

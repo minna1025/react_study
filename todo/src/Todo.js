@@ -24,12 +24,15 @@ class Todo extends Component {
   }
 
   handleComplete = () => {
-    this.props.todo.state = !this.props.todo.state;
-    const { onComplete } = this.props;
-    onComplete( this.props.todo.id, this.props.todo );
+    if ( !this.state.edit ){
+      this.props.todo.state = !this.props.todo.state;
+      const { onComplete } = this.props;
+      onComplete( this.props.todo.id, this.props.todo );
+    }
   }
 
   handleChange = (e) => {
+    e.preventDefault();
     this.setState({
       doSomething: e.target.value
     });
@@ -63,7 +66,7 @@ class Todo extends Component {
                 <form onSubmit={this.handleEdit}>
                   <input 
                     type="text"
-                    placeholder="뭐라고바꿀꼰데?!?!?"
+                    placeholder="Show me what will U do?"
                     onChange={this.handleChange}
                     value={this.state.doSomething} />
                   <button id="btn_add" type="submit">EDIT</button>

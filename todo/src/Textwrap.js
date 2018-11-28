@@ -34,7 +34,7 @@ class Textwrap extends Component {
         <input 
           id="textBox"
           type="text"
-          placeholder="뭐할껀데?!?!?"
+          placeholder="What will U do?"
           onChange={this.handleChange}
           value={this.state.doSomething} />
         <button id="btn_add" type="submit">ADD</button>
