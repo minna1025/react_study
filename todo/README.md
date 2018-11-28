@@ -1,3 +1,5 @@
+You can visit the deployed app, at https://minna1025.github.io/react_todo/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
